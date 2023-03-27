@@ -26,7 +26,8 @@ config :url_shortener, UrlShortenerWeb.Endpoint,
   secret_key_base: "LY7Kf0TOM9Wm50c8+p4VOAW7YGKoQhIvpXzNkb7DVN5NQV7BY+85/JrXRbX54Ku6",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
