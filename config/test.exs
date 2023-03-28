@@ -23,8 +23,7 @@ config :url_shortener, UrlShortenerWeb.Endpoint,
 # In test we don't send emails.
 config :url_shortener, UrlShortener.Mailer, adapter: Swoosh.Adapters.Test
 
-# Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :notice
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime

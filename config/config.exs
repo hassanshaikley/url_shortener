@@ -58,6 +58,10 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
+config :url_shortener,
+  short_code_chars:
+    Enum.map(?a..?z, &<<&1>>) ++ Enum.map(?A..?Z, &<<&1>>) ++ Enum.map(?0..?9, &<<&1>>)
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

@@ -1,5 +1,6 @@
 defmodule UrlShortener.Link do
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "links" do
     field :url, :string
@@ -7,4 +8,36 @@ defmodule UrlShortener.Link do
 
     timestamps(type: :utc_datetime)
   end
+
+  def changeset(link, params \\ %{}) do
+    link
+    |> cast(params, [:url])
+    |> validate_required([:url])
+    |> put_change(:short_url, generate_short_url())
+
+    # |> validate_format(
+    #   :url,
+    #   ~r/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/
+    # )
+    # |> validate_url(:url)
+    # |> validate_change(:url, &verify_url/2)
+  end
+
+  defp generate_short_url() do
+    short_code_chars = Application.get_env(:url_shortener, :short_code_chars)
+
+    Enum.reduce(0..5, [], fn _n, acc -> acc ++ Enum.take_random(short_code_chars, 1) end)
+    |> List.to_string()
+  end
+
+  # defp verify_url(:url, url) do
+  #   IO.puts("Verify url")
+  #   uri = URI.parse(url)
+  #   IO.inspect(uri, label: :uri)
+
+  #   case uri.scheme != nil && uri.host =~ "." do
+  #     true -> []
+  #     false -> [url: "Invalid url"]
+  #   end
+  # end
 end

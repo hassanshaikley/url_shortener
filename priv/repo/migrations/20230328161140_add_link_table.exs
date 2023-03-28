@@ -8,5 +8,8 @@ defmodule UrlShortener.Repo.Migrations.AddLinkTable do
 
       timestamps(type: :utc_datetime)
     end
+
+    unique_index(:links, :url)
+    unique_index(:short_url, :url)
   end
 end
