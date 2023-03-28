@@ -24,8 +24,8 @@ defmodule UrlShortenerWeb.LinkTest do
     end
 
     test "invalid when url is invalid" do
-      link = %Link{url: "invalid_url"}
-      changeset = Link.changeset(link)
+      url = "invalid_url"
+      changeset = Link.changeset(%Link{}, %{url: url})
       refute changeset.valid?
     end
   end

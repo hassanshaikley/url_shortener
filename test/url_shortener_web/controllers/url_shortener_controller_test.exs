@@ -29,6 +29,16 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
         assert String.length(short_url) == 6
       end) =~ "Already exists, fetching link"
     end
+
+    test "returns an error when url is invalid", %{conn: conn} do
+      url = "invalid_url"
+
+      capture_log(fn ->
+        conn = post(conn, "/api/create", %{"url" => url})
+        response = json_response(conn, 200)
+        assert %{"error" => "Invalid url"} = response
+      end)
+    end
   end
 
   describe "GET /{id}" do
@@ -43,8 +53,7 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
       assert redirected_to(conn) == url
     end
 
-    @tag :only
-    test "flash when invalid", %{conn: conn} do
+    test "flashes with an error when invalid", %{conn: conn} do
       conn = get(conn, "/123456")
       assert get_flash(conn, :error) =~ "Invalid short code, try regenerating"
     end

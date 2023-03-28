@@ -14,13 +14,7 @@ defmodule UrlShortener.Link do
     |> cast(params, [:url])
     |> validate_required([:url])
     |> put_change(:short_url, generate_short_url())
-
-    # |> validate_format(
-    #   :url,
-    #   ~r/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/
-    # )
-    # |> validate_url(:url)
-    # |> validate_change(:url, &verify_url/2)
+    |> validate_change(:url, &verify_url/2)
   end
 
   defp generate_short_url() do
@@ -30,14 +24,12 @@ defmodule UrlShortener.Link do
     |> List.to_string()
   end
 
-  # defp verify_url(:url, url) do
-  #   IO.puts("Verify url")
-  #   uri = URI.parse(url)
-  #   IO.inspect(uri, label: :uri)
+  defp verify_url(:url, url) do
+    uri = URI.parse(url)
 
-  #   case uri.scheme != nil && uri.host =~ "." do
-  #     true -> []
-  #     false -> [url: "Invalid url"]
-  #   end
-  # end
+    case uri.scheme != nil && uri.host =~ "." do
+      true -> []
+      false -> [url: "Invalid url"]
+    end
+  end
 end

@@ -13,17 +13,22 @@ defmodule UrlShortenerWeb.UrlShortenerController do
         nil ->
           Logger.notice("Doesn't exist, creating link")
 
-          link = %Link{url: url}
-          changeset = Link.changeset(link)
-          UrlShortener.Repo.insert!(changeset)
+          changeset = Link.changeset(%Link{}, %{url: url})
+          UrlShortener.Repo.insert(changeset)
 
         link ->
           Logger.notice("Already exists, fetching link")
 
-          link
+          {:ok, link}
       end
 
-    json(conn, %{short_url: link.short_url})
+    case link do
+      {:error, _changeset} ->
+        json(conn, %{error: "Invalid url"})
+
+      {:ok, link} ->
+        json(conn, %{short_url: link.short_url})
+    end
   end
 
   def show(conn, params) do
