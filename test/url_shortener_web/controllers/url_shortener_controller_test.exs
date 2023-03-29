@@ -45,6 +45,7 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
     test "redirects to url when valid and increments hits", %{conn: conn} do
       url = "https://some_url2.com"
       link = %Link{url: url}
+
       changeset = Link.changeset(link)
       inserted_link = UrlShortener.Repo.insert!(changeset)
 
