@@ -6,13 +6,14 @@ defmodule UrlShortener.Link do
   schema "links" do
     field :url, :string
     field :short_url, :string
+    field :hits, :integer
 
     timestamps(type: :utc_datetime)
   end
 
   def changeset(link, params \\ %{}) do
     link
-    |> cast(params, [:url])
+    |> cast(params, [:url, :hits])
     |> validate_required([:url])
     |> put_change(:short_url, generate_short_url())
     |> validate_change(:url, &verify_url/2)

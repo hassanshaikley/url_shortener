@@ -42,7 +42,7 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
   end
 
   describe "GET /{id}" do
-    test "redirects to url when valid", %{conn: conn} do
+    test "redirects to url when valid and increments hits", %{conn: conn} do
       url = "https://some_url2.com"
       link = %Link{url: url}
       changeset = Link.changeset(link)
@@ -51,6 +51,9 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
       conn = get(conn, "/#{inserted_link.short_url}")
 
       assert redirected_to(conn) == url
+
+      updated_link_post_hit = UrlShortener.Repo.get(Link, inserted_link.id)
+      assert updated_link_post_hit.hits == 1
     end
 
     test "flashes with an error when invalid", %{conn: conn} do

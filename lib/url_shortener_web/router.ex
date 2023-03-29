@@ -18,6 +18,7 @@ defmodule UrlShortenerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/stats", StatsController, :index
     get "/:short_url", UrlShortenerController, :show
   end
 

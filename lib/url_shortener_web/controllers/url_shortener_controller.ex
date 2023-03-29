@@ -13,7 +13,7 @@ defmodule UrlShortenerWeb.UrlShortenerController do
         nil ->
           Logger.notice("Doesn't exist, creating link")
 
-          changeset = Link.changeset(%Link{}, %{url: url})
+          changeset = Link.changeset(%Link{}, %{url: url, hits: 0})
           UrlShortener.Repo.insert(changeset)
 
         link ->
@@ -43,6 +43,9 @@ defmodule UrlShortenerWeb.UrlShortenerController do
         |> redirect(to: "/")
 
       link ->
+        updated_link = Ecto.Changeset.change(link, hits: link.hits + 1)
+        UrlShortener.Repo.update!(updated_link)
+
         redirect(conn, external: link.url)
     end
   end
