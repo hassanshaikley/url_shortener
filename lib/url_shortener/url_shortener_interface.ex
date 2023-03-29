@@ -1,4 +1,8 @@
 defmodule UrlShortener.UrlShortenerInterface do
+  @moduledoc """
+  Business logic around creating/fetching a link by the link
+  As well as fetching a link by the short url
+  """
   require Logger
 
   alias UrlShortener.Link
