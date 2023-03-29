@@ -28,8 +28,6 @@ let liveSocket = new LiveSocket("/live", Socket, {
   params: { _csrf_token: csrfToken },
 });
 
-// Show progress bar on live navigation and form submits
-
 // connect if there are any LiveViews on the page
 liveSocket.connect();
 

@@ -24,7 +24,9 @@ defmodule UrlShortenerWeb.UrlShortenerController do
 
     case link do
       {:error, _changeset} ->
-        json(conn, %{error: "Invalid url"})
+        conn
+        |> put_status(400)
+        |> json(%{error: "Invalid url"})
 
       {:ok, link} ->
         json(conn, %{short_url: link.short_url})

@@ -2,8 +2,40 @@
   URL Shortener
 </h1>
 
+<script>
+function onSubmit (event) {
+  const { value } = document.getElementById("url");
+
+  fetch("/api/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ url: value }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      const alertDanger = document.getElementsByClassName("alert-danger")[0]
+      const alertInfo = document.getElementsByClassName("alert-info")[0]
+      if (json.error) {
+        alertDanger.innerHTML = json.error
+        alertInfo.innerHTML = ""
+      } else {
+        alertDanger.innerHTML = ""
+        alertInfo.innerHTML = `Link: <a href="${json.short_url}"><%= UrlShortenerWeb.Endpoint.url() %>/${json.short_url}</a>`
+      }
+    })
+
+  event.preventDefault();
+};
+</script>
+
+
+
 <div class="text-3xl font-bold underline m-auto text-center my-10">
-  <form action="/api/create" method="post">
+  <form  method="post" onsubmit="onSubmit(event)">
     <label for="url">URL:</label><br />
     <input type="text" id="url" name="url"><br />
     <br/>

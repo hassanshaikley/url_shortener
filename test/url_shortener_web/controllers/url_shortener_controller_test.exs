@@ -35,7 +35,7 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
 
       capture_log(fn ->
         conn = post(conn, "/api/create", %{"url" => url})
-        response = json_response(conn, 200)
+        response = json_response(conn, 400)
         assert %{"error" => "Invalid url"} = response
       end)
     end
