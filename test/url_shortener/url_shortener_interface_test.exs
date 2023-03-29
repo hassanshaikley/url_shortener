@@ -6,7 +6,6 @@ defmodule UrlShortener.UrlShortenerInterfaceTest do
   alias UrlShortener.UrlShortenerInterface
 
   describe "create_or_fetch_link_by_url/1" do
-    @tag :only
     test "generates a short url if it doesnt exist" do
       capture_log(fn ->
         url = "https://google.com"
