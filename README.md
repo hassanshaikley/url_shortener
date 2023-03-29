@@ -31,4 +31,3 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 ## Potential improvements
 
 - Check that a get request for the URL returns a 200 before creating a Link
-- Instead of logging in the tests use another method of verifying that code path is executed
