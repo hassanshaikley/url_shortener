@@ -1,4 +1,5 @@
 defmodule UrlShortener.Link do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -17,7 +18,7 @@ defmodule UrlShortener.Link do
     |> validate_change(:url, &verify_url/2)
   end
 
-  defp generate_short_url() do
+  defp generate_short_url do
     short_code_chars = Application.get_env(:url_shortener, :short_code_chars)
 
     Enum.reduce(0..5, [], fn _n, acc -> acc ++ Enum.take_random(short_code_chars, 1) end)
