@@ -47,6 +47,7 @@ defmodule UrlShortener.MixProject do
       {:phoenix, "~> 1.6.15"},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
+      {:sobelow, "~> 0.11", only: [:dev, :test], runtime: false},
       {:swoosh, "~> 1.3"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
