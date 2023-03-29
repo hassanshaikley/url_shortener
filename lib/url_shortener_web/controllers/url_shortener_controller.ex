@@ -6,9 +6,7 @@ defmodule UrlShortenerWeb.UrlShortenerController do
   def create(conn, params) do
     url = params["url"]
 
-    link = UrlShortenerInterface.create_or_fetch_link_by_url(url)
-
-    case link do
+    case UrlShortenerInterface.create_or_fetch_link_by_url(url) do
       {:error, _changeset} ->
         conn
         |> put_status(400)

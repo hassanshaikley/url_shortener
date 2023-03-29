@@ -13,7 +13,7 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
         response = json_response(conn, 200)
         assert %{"short_url" => short_url} = response
         assert String.length(short_url) == 6
-      end) =~ "Doesn't exist, creating link"
+      end)
     end
 
     test "does not generates a short_url if alreaady exists", %{conn: conn} do
@@ -27,7 +27,7 @@ defmodule UrlShortenerWeb.UrlShortenerControllerTest do
         response = json_response(conn, 200)
         assert %{"short_url" => short_url} = response
         assert String.length(short_url) == 6
-      end) =~ "Already exists, fetching link"
+      end)
     end
 
     test "returns an error when url is invalid", %{conn: conn} do

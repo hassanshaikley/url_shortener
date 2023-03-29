@@ -1,4 +1,4 @@
-defmodule UrlShortenerWeb.LinkTest do
+defmodule UrlShortener.LinkTest do
   use UrlShortener.DataCase
   alias UrlShortener.Link
 
