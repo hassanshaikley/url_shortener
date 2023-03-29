@@ -20,13 +20,13 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## CI Steps
 
-`mix hex.audit` to check for unused deps
-`mix format --dry-run --check-formatted` to check format
-`mix compile --all-warnings --warning-as-errors` to make sure compilation is successful
-`mix ecto.create && mix ecto.migrate && mix ecto.rollback --all` to make sure database goes forward and backward
-`mix credo --strict` to analyze the code
-`mix sobelow` to run security oriented static analysis of the code
-`mix test` to run the tests
+- `mix hex.audit` to check for unused deps
+- `mix format --dry-run --check-formatted` to check format
+- `mix compile --all-warnings --warning-as-errors` to make sure compilation is successful
+- `mix ecto.create && mix ecto.migrate && mix ecto.rollback --all` to make sure database goes forward and backward
+- `mix credo --strict` to analyze the code
+- `mix sobelow` to run security oriented static analysis of the code
+- `mix test` to run the tests
 
 ## Potential improvements
 
