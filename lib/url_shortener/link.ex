@@ -17,6 +17,7 @@ defmodule UrlShortener.Link do
     |> validate_required([:url])
     |> put_change(:short_url, generate_short_url())
     |> validate_change(:url, &verify_url/2)
+    |> unique_constraint([:url, :short_url])
   end
 
   defp generate_short_url do
