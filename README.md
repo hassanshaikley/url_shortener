@@ -31,3 +31,5 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 ## Potential improvements
 
 - Check that a get request for the URL returns a 200 before creating a Link
+- Check that a short_url doesn't exist after generating it. If it does, then generate another short_url. This will eliminate situations where you get an error becuase two short_urls overlap.
+- Format the changeset errors and return those directly to the front end.
