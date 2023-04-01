@@ -36,5 +36,12 @@ defmodule UrlShortener.UrlShortenerInterfaceTest do
       link = UrlShortenerInterface.get_link_by_short_url(inserted_link.short_url)
       assert link.hits == 1
     end
+
+    test "returns nil when doesn't eixst" do
+      short_url = "abcde"
+
+      link = UrlShortenerInterface.get_link_by_short_url(short_url)
+      assert is_nil(link)
+    end
   end
 end
